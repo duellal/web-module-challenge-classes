@@ -44,8 +44,35 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(edible){
+    if(this.stomach.length < 10){
+      this.stomach.push(edible)
+    }
+  }
+  poop(){
+    this.stomach = []
+  }
+  toString(){
+    return `${this.name}, ${this.age}`
+  }
 }
+
+// //Double checking work
+// const kevin = new Person('Kevin', 38)
+
+// console.log(kevin.toString())
+// kevin.eat('Tofu')
+// kevin.eat('Berries')
+// kevin.eat('Pudding')
+// kevin.eat('Cranberry Juice')
+// console.log(kevin.stomach)
+// kevin.poop()
+// console.log(kevin.stomach)
 
 /*
   TASK 2
@@ -62,8 +89,42 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gal){
+    this.tank += gal;
+  }
+  drive(distance){
+    const maxDistance = this.tank * this.milesPerGallon;
+
+    if(distance > maxDistance){
+      this.odometer += maxDistance;
+      this.tank = 0;
+
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    } else{
+      this.odometer += distance;
+      this.tank -= distance/this.milesPerGallon;
+    }
+  }
 }
+
+// // Double Checking Work:
+const impala = new Car('Chevrolet', 20)
+
+// console.log(impala)
+// impala.fill(10)
+// console.log(impala)
+// console.log(impala.drive(100))
+// console.log(impala)
+// impala.fill(20)
+// console.log(impala.drive(1000))
+// console.log(impala)
+
 
 /*
   TASK 3
@@ -79,8 +140,24 @@ class Car {
 */
 
 class Lambdasian {
-  
+  constructor(attributes){
+    this.age = attributes.age;
+    this.name = attributes.name;
+    this.location = attributes.location
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}.`
+  }
 }
+
+// //Double Checking work
+const person = new Lambdasian({
+  name: 'Sebastian',
+  age: 23,
+  location: 'Paris'
+})
+
+// console.log(person.speak())
 
 /*
   TASK 4
@@ -97,10 +174,33 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 
-class Instructor {
-
+class Instructor extends Lambdasian{
+  constructor(attributes){
+    super(attributes)
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}.`
+  }
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}.`
+  }
 }
 
+// // Double Checking Work
+const greg = new Instructor({
+  name: 'Greg',
+  age: '43',
+  location: 'Iowa',
+  specialty: 'Software Development',
+  favLanguage: 'CSS',
+  catchPhrase: 'You got this!'
+})
+
+// console.log(greg.grade(person, 'prototypes and classes'))
+// console.log(greg.demo('JavaScript'))
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -117,9 +217,38 @@ class Instructor {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 
-class Student {
-   
+class Student extends Lambdasian{
+   constructor(attributes){
+     super(attributes);
+     this.previousBackground = attributes.previousBackground;
+     this.className = attributes.className;
+     this.favSubjects = attributes.favSubjects
+   }
+   listSubjects(){
+     return `Loving ${this.favSubjects}!`
+   }
+   PRAssignment(subject){
+     return `${this.name} has submitted a PR for ${subject}.`
+   }
+   sprintChallenge(subject){
+     return `${this.name} has begun sprint challenge on ${subject}.`
+   }
 }
+
+// //Double Checking Work:
+const deidra = new Student({
+  name: 'Deidra', 
+  age: '77',
+  location: 'Ireland', 
+  previousBackground: 'Bank Investor',
+  className: 'CS83',
+  favSubjects: ['JavaScript', 'prototypes', 'CSS', 'constructor functions']
+})
+
+// console.log(deidra)
+// console.log(deidra.sprintChallenge('classes'))
+// console.log(deidra.PRAssignment('classes'))
+// console.log(deidra.listSubjects())
 
 /*
   TASK 6
@@ -135,10 +264,33 @@ class Student {
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
 
-class ProjectManager {
-   
+class ProjectManager extends Instructor{
+   constructor(attributes){
+     super(attributes);
+     this.gradClassName = attributes.gradClassName;
+     this.favInstructor = attributes.favInstructor;
+   }
+   standUp(channel){
+     return `${this.name} announces to ${channel}, @${channel} standy times!`
+   }
+   debugsCode(student, subject){
+     return `${this.name} debugs ${student.name}'s code on ${subject}.`
+   }
 }
 
+//Double Check Work
+const janePM = new ProjectManager({
+  name: 'Jane',
+  age: '30',
+  location: 'Pittsburg',
+  gradClassName: 'CS10',
+  favInstructor: 'Jessica'
+})
+
+// console.log(janePM)
+// console.log(janePM.standUp('CS10'))
+// console.log(janePM.debugsCode(person, 'prototypes'))
+// console.log(janePM.debugsCode(deidra, 'Objects'))
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
