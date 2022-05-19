@@ -62,6 +62,9 @@ class Person {
   }
 }
 
+// I realize I do not need to double check my work if the tests are working. I like to double check and make sure they are doing what I think they should, regardless of the tests performed.
+
+
 // //Double checking work
 // const kevin = new Person('Kevin', 38)
 
@@ -222,7 +225,9 @@ class Student extends Lambdasian{
      super(attributes);
      this.previousBackground = attributes.previousBackground;
      this.className = attributes.className;
-     this.favSubjects = attributes.favSubjects
+     this.favSubjects = attributes.favSubjects;
+     this.grade = Math.floor((Math.random() * 100) + 1);
+     this.graduate = this.grade > 70
    }
    listSubjects(){
      return `Loving ${this.favSubjects}!`
@@ -242,13 +247,16 @@ const deidra = new Student({
   location: 'Ireland', 
   previousBackground: 'Bank Investor',
   className: 'CS83',
-  favSubjects: ['JavaScript', 'prototypes', 'CSS', 'constructor functions']
+  favSubjects: ['JavaScript', 'prototypes', 'CSS', 'constructor functions'],
 })
 
 // console.log(deidra)
 // console.log(deidra.sprintChallenge('classes'))
 // console.log(deidra.PRAssignment('classes'))
 // console.log(deidra.listSubjects())
+
+//Double checking the stretch goals work:
+console.log(deidra)
 
 /*
   TASK 6
@@ -300,6 +308,13 @@ const janePM = new ProjectManager({
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
 
+/* Only way I found to make this work is to not do it as a method, but as:
+
+...
+this.grade = Math.floor((Math.random() * 100) + 1);
+this.graduate = this.grade > 70;
+
+*/
 
 //End of Challenge
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
